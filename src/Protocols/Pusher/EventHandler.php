@@ -5,6 +5,9 @@ namespace Laravel\Reverb\Protocols\Pusher;
 use Exception;
 use Illuminate\Support\Str;
 use Laravel\Reverb\Contracts\Connection;
+use Laravel\Reverb\Events\ClientConnected;
+use Laravel\Reverb\Events\PusherSubscribe;
+use Laravel\Reverb\Events\PusherUnsubscribe;
 use Laravel\Reverb\Protocols\Pusher\Channels\CacheChannel;
 use Laravel\Reverb\Protocols\Pusher\Channels\Channel;
 use Laravel\Reverb\Protocols\Pusher\Contracts\ChannelManager;
@@ -48,6 +51,7 @@ class EventHandler
             'socket_id' => $connection->id(),
             'activity_timeout' => 30,
         ]);
+        ClientConnected::dispatch($connection);
     }
 
     /**
@@ -70,7 +74,7 @@ class EventHandler
     protected function afterSubscribe(Channel $channel, Connection $connection): void
     {
         $this->sendInternally($connection, 'subscription_succeeded', $channel->data(), $channel->name());
-
+        PusherSubscribe::dispatch($connection, $channel->name());
         match (true) {
             $channel instanceof CacheChannel => $this->sendCachedPayload($channel, $connection),
             default => null,
@@ -82,6 +86,7 @@ class EventHandler
      */
     public function unsubscribe(Connection $connection, string $channel): void
     {
+        PusherUnsubscribe::dispatch($connection, $channel);
         $channel = $this->channels
             ->for($connection->app())
             ->find($channel)
