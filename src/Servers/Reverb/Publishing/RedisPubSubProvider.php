@@ -56,6 +56,12 @@ class RedisPubSubProvider implements PubSubProvider
         $this->subscribingClient->on('message', function (string $channel, string $payload) {
             $this->messageHandler->handle($payload);
         });
+
+        $this->subscribingClient->on('unsubscribe', function (string $channel) {
+            if ($this->channel === $channel) {
+                $this->subscribingClient->subscribe($channel);
+            }
+        });
     }
 
     /**
@@ -92,10 +98,6 @@ class RedisPubSubProvider implements PubSubProvider
         $parsed = (new ConfigurationUrlParser)->parseConfiguration($config);
 
         $driver = strtolower($parsed['driver'] ?? '');
-
-        if (in_array($driver, ['tcp', 'tls'])) {
-            $parsed['scheme'] = $driver;
-        }
 
         if (in_array($driver, ['tcp', 'tls'])) {
             $parsed['scheme'] = $driver;
