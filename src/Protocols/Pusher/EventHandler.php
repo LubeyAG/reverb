@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Laravel\Reverb\Contracts\Connection;
+use Laravel\Reverb\Events\PusherSubscribe;
+use Laravel\Reverb\Events\PusherUnsubscribe;
 use Laravel\Reverb\Protocols\Pusher\Channels\CacheChannel;
 use Laravel\Reverb\Protocols\Pusher\Channels\Channel;
 use Laravel\Reverb\Protocols\Pusher\Contracts\ChannelManager;
@@ -73,7 +75,7 @@ class EventHandler
             ->findOrCreate($channel);
 
         $channel->subscribe($connection, $auth, $data);
-
+        PusherSubscribe::dispatch($connection, "EVENTHANDLER-".$channel->name());
         $this->afterSubscribe($channel, $connection);
     }
 
@@ -95,6 +97,7 @@ class EventHandler
      */
     public function unsubscribe(Connection $connection, string $channel): void
     {
+        PusherUnsubscribe::dispatch($connection, "EVENTHANDLER-".$channel);
         $channel = $this->channels
             ->for($connection->app())
             ->find($channel)
