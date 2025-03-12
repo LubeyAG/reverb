@@ -81,8 +81,9 @@ class Channel
 
         if ($this->connections->isEmpty()) {
             app(ChannelManager::class)->for($connection->app())->remove($this);
+            PusherUnsubscribe::dispatch($connection, $this->name);
         }
-        PusherUnsubscribe::dispatch($connection, $this->name);
+
     }
 
     /**
