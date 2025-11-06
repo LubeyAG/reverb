@@ -1,6 +1,26 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/reverb/compare/v1.4.6...main)
+## [Unreleased](https://github.com/laravel/reverb/compare/v1.5.1...main)
+
+## [v1.5.1](https://github.com/laravel/reverb/compare/v1.5.0...v1.5.1) - 2025-06-16
+
+* Update logo by [@iamdavidhill](https://github.com/iamdavidhill) in https://github.com/laravel/reverb/pull/330
+* Fix encoding of data field in presence channel events to match Pusher protocol by [@alinapotupchik](https://github.com/alinapotupchik) in https://github.com/laravel/reverb/pull/337
+
+## [v1.5.0](https://github.com/laravel/reverb/compare/v1.4.8...v1.5.0) - 2025-03-31
+
+* [1.x] Bump dependencies to fix tests by [@joedixon](https://github.com/joedixon) in https://github.com/laravel/reverb/pull/323
+* [1.x] Adds support for reconnecting to Redis if disconnected by server by [@joedixon](https://github.com/joedixon) in https://github.com/laravel/reverb/pull/281
+* [1.x] Sets X-Powered-By header by [@joedixon](https://github.com/joedixon) in https://github.com/laravel/reverb/pull/327
+* [1.x] Fix issue with quoted string in .env when running install command by [@joedixon](https://github.com/joedixon) in https://github.com/laravel/reverb/pull/328
+
+## [v1.4.8](https://github.com/laravel/reverb/compare/v1.4.7...v1.4.8) - 2025-03-16
+
+* Allow client event without data by [@v-sulzhin](https://github.com/v-sulzhin) in https://github.com/laravel/reverb/pull/315
+
+## [v1.4.7](https://github.com/laravel/reverb/compare/v1.4.6...v1.4.7) - 2025-03-06
+
+* [1.x] Adds support for server path prefix by [@adrum](https://github.com/adrum) in https://github.com/laravel/reverb/pull/311
 
 ## [v1.4.6](https://github.com/laravel/reverb/compare/v1.4.5...v1.4.6) - 2025-01-28
 
