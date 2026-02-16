@@ -12,46 +12,12 @@ use React\Promise\Promise;
 afterAll(function () {
     $loop = (new ReflectionClass(Loop::class));
     $property = $loop->getProperty('instance');
-    $property->setAccessible(true);
+
+    if (PHP_VERSION_ID < 80100) {
+        $property->setAccessible(true);
+    }
+
     $property->setValue($loop, null);
-});
-
-it('resubscribes to the scaling channel on unsubscribe event', function () {
-    $channel = 'reverb';
-    $subscriber = Mockery::mock(Client::class);
-
-    $subscriber->shouldReceive('on')
-        ->with('unsubscribe', Mockery::on(function ($callback) use ($channel) {
-            $callback($channel);
-
-            return true;
-        }))->once();
-
-    $subscriber->shouldReceive('on')
-        ->with('message', Mockery::any())
-        ->zeroOrMoreTimes();
-
-    $subscriber->shouldReceive('on')
-        ->with('close', Mockery::any())
-        ->zeroOrMoreTimes();
-
-    $subscriber->shouldReceive('subscribe')
-        ->twice()
-        ->with($channel);
-
-    $clientFactory = Mockery::mock(RedisClientFactory::class);
-
-    // The first call to make() will return a publishing client
-    $clientFactory->shouldReceive('make')
-        ->once()
-        ->andReturn(new Promise(fn (callable $resolve) => $resolve));
-
-    $clientFactory->shouldReceive('make')
-        ->once()
-        ->andReturn(new Promise(fn (callable $resolve) => $resolve($subscriber)));
-
-    $provider = new RedisPubSubProvider($clientFactory, Mockery::mock(PubSubIncomingMessageHandler::class), $channel);
-    $provider->connect(Mockery::mock(LoopInterface::class));
 });
 
 it('can successfully reconnect', function () {

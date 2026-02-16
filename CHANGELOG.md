@@ -1,6 +1,33 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/reverb/compare/v1.5.1...main)
+## [Unreleased](https://github.com/laravel/reverb/compare/v1.7.1...main)
+
+## [v1.7.1](https://github.com/laravel/reverb/compare/v1.7.0...v1.7.1) - 2026-02-04
+
+* Supports Laravel 13 by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/reverb/pull/364
+* Remove `Output` aliases from Laravel Reverb configuration by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/reverb/pull/363
+
+## [v1.7.0](https://github.com/laravel/reverb/compare/v1.6.3...v1.7.0) - 2026-01-06
+
+* [1.x] Fixes memory leak by [@joedixon](https://github.com/joedixon) in https://github.com/laravel/reverb/pull/359
+* Add allowed classes by [@taylorotwell](https://github.com/taylorotwell) in https://github.com/laravel/reverb/pull/360
+
+## [v1.6.3](https://github.com/laravel/reverb/compare/v1.6.2...v1.6.3) - 2025-11-28
+
+* Add reload command by [@barryvdh](https://github.com/barryvdh) in https://github.com/laravel/reverb/pull/355
+
+## [v1.6.2](https://github.com/laravel/reverb/compare/v1.6.1...v1.6.2) - 2025-11-21
+
+* [1.x] PHP 8.5 Compatibility by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/reverb/pull/353
+
+## [v1.6.1](https://github.com/laravel/reverb/compare/v1.6.0...v1.6.1) - 2025-11-11
+
+* Decode the client event data if it is a valid json string by [@vunguyen-it](https://github.com/vunguyen-it) in https://github.com/laravel/reverb/pull/352
+
+## [v1.6.0](https://github.com/laravel/reverb/compare/v1.5.1...v1.6.0) - 2025-09-07
+
+* [1.x] Adds optional application level connection limits by [@joedixon](https://github.com/joedixon) in https://github.com/laravel/reverb/pull/347
+* Remove re-subscription logic in scaling mode by [@ashiquzzaman33](https://github.com/ashiquzzaman33) in https://github.com/laravel/reverb/pull/346
 
 ## [v1.5.1](https://github.com/laravel/reverb/compare/v1.5.0...v1.5.1) - 2025-06-16
 
